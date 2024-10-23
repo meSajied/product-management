@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
+import org.market.dtos.ProductStockUpdateDTO;
 import org.market.products.*;
 import org.market.services.ProductService;
 
@@ -32,7 +33,7 @@ public class ProductController {
     return productService.getAllProducts();
   }
 
-  @GetMapping("/products/{id}")
+  @GetMapping("/{id}")
   public Optional<Product> getProduct(@PathVariable Long id) {
     return productService.getProduct(id);
   }
@@ -53,7 +54,8 @@ public class ProductController {
   }
 
   @PatchMapping("/{id}/update-stock")
-  public Optional<Product> updateStock(@RequestBody Product product) {
-    return productService.updateProduct(product);
+  public Optional<Product> updateStock(@PathVariable Long id, 
+      @Valid @RequestBody ProductStockUpdateDTO product) {
+    return productService.updateStock(id, product);
   }
 }

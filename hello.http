@@ -1,4 +1,63 @@
-# post
-
-GET http://localhost:8080/products/
+### Get all products
+GET http://localhost:8080/products
 Content-Type: application/json
+
+###
+
+### Get a product by ID
+GET http://localhost:8080/products/2
+Content-Type: application/json
+
+###
+
+### Create a new product
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "New Product",
+  "description": "This is a new product.",
+  "price": 25.50,
+  "stockQuantity": 100,
+  "category": 1
+}
+
+
+### null description
+
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "New Product",
+  //"description": "This is a new product.",
+  "price": 25.50,
+  "stockQuantity": 100,
+  "category": 1
+}
+
+###
+
+### Update a product
+PUT http://localhost:8080/products/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Updated Product",
+  "description": "Updated description.",
+  "price": 30.00,
+  "stockQuantity": 200,
+  "category": 2
+}
+
+###
+
+### Update product stock
+PATCH http://localhost:8080/products/1/update-stock
+Content-Type: application/json
+
+{
+  "id": 1,
+  "stockQuantity": 900
+}

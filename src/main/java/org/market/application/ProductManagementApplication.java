@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = {"org.market.products",
 			"org.market.controllers", "org.market.Repositories",
-			"org.market.services"})
+			"org.market.services", "org.market.exeption", "org.market.dtos"})
 @EntityScan(basePackages = "org.market.products")
 @EnableJpaRepositories(basePackages = "org.market.Repositories")
 public class ProductManagementApplication {
