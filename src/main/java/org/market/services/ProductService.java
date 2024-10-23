@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.market.Repositories.ProductRepository;
+import org.market.dtos.ProductStockUpdateDTO;
 import org.market.products.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,13 +53,13 @@ public class ProductService {
     productRepository.deleteById(id);
   }
 
-  public Optional<Product> updateStock(Product product) {
-    return productRepository.findById(product.getId()).map(existingData -> {
+  public Optional<Product> updateStock(Long id, ProductStockUpdateDTO product) {
+    return productRepository.findById(id).map(existingData -> {
       return update(existingData, product);
     });
   }
 
-  private Product update(Product existingData, Product newData) {
+  private Product update(Product existingData, ProductStockUpdateDTO newData) {
     existingData.setStockQuantity(newData.getStockQuantity());
     
     return productRepository.save(existingData);
