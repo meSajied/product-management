@@ -1,7 +1,6 @@
 package org.market.dtos;
 
 import jakarta.validation.constraints.NotNull;
-import java.math.BigDecimal;
 
 import org.springframework.stereotype.Service;
 
@@ -9,13 +8,13 @@ import org.springframework.stereotype.Service;
 public class ProductStockUpdateDTO {
 
   @NotNull(message = "Stock quantity is required")
-  private BigDecimal stockQuantity;
+  private Integer stockQuantity;
 
-  public BigDecimal getStockQuantity() {
+  public Integer getStockQuantity() {
     return stockQuantity;
   }
 
-  public void setStockQuantity(BigDecimal stockQuantity) {
+  public void setStockQuantity(Integer stockQuantity) {
     this.stockQuantity = stockQuantity;
   }
 }

@@ -1,10 +1,18 @@
 package org.market.Repositories;
 
-import org.market.products.Product;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
+import java.util.Optional;
 
-@Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
-  
+import org.market.products.Product;
+import org.springframework.stereotype.Service;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public interface ProductRepository {
+  Product save(Product product);
+  List<Product> findAll();
+  Optional<Product> findById(Long id);
+  void deleteById(Long id);
 }

@@ -1,5 +1,6 @@
 package org.market.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,7 @@ public class ProductService {
   }
 
   public Product createProduct(Product product) {
+    validateProduct(product);
     return productRepository.save(product);
   }
 
@@ -35,9 +37,21 @@ public class ProductService {
   
   public Optional<Product> updateProduct(Product product) {
     return productRepository.findById(product.getId()).map(existingData -> {
+      validateProduct(product);
       return updateData(existingData, product);
     });
   }
+
+  private void validateProduct(Product product) {
+    if (product.getPrice().compareTo(BigDecimal.ONE) == -1) {
+        throw new IllegalArgumentException("Price must be greater than 1");
+    }
+
+    // Check for negative stock quantity
+    if (product.getStockQuantity() == null || product.getStockQuantity() < 0) {
+        throw new IllegalArgumentException("Stock quantity cannot be negative");
+    }
+}
 
   private Product updateData(Product existingData, Product newData) {
     existingData.setName(newData.getName());
@@ -55,6 +69,9 @@ public class ProductService {
 
   public Optional<Product> updateStock(Long id, ProductStockUpdateDTO product) {
     return productRepository.findById(id).map(existingData -> {
+      if (product.getStockQuantity() < 0) {
+        throw new IllegalArgumentException("Stock quantity cannot be negative");
+      }
       return update(existingData, product);
     });
   }

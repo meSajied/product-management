@@ -27,10 +27,10 @@ public class Product {
   private BigDecimal price;
 
   @NotNull(message = "Stock quantity is required")
-  private BigDecimal stockQuantity;
+  private Integer stockQuantity;
 
   @NotNull(message = "Category is required")
-  private BigDecimal category;
+  private String category;
 
   @CreationTimestamp
   private LocalDateTime createdAt;
@@ -62,16 +62,16 @@ public class Product {
   public void setPrice(BigDecimal price) {
     this.price = price;
   }
-  public BigDecimal getStockQuantity() {
+  public Integer getStockQuantity() {
     return stockQuantity;
   }
-  public void setStockQuantity(BigDecimal stockQuantity) {
+  public void setStockQuantity(Integer stockQuantity) {
     this.stockQuantity = stockQuantity;
   }
-  public BigDecimal getCategory() {
+  public String getCategory() {
     return category;
   }
-  public void setCategory(BigDecimal category) {
+  public void setCategory(String category) {
     this.category = category;
   }
   public LocalDateTime getCreatedAt() {
