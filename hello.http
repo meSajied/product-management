@@ -17,9 +17,9 @@ Content-Type: application/json
 {
   "name": "New Product",
   "description": "This is a new product.",
-  "price": 25.50,
-  "stockQuantity": 100,
-  "category": 1
+  "price": 1.0,
+  "stockQuantity": -2,
+  "category": "this"
 }
 
 
@@ -46,7 +46,7 @@ Content-Type: application/json
   "id": 1,
   "name": "Updated Product",
   "description": "Updated description.",
-  "price": 30.00,
+  "price": ,
   "stockQuantity": 200,
   "category": 2
 }
