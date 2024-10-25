@@ -47,7 +47,6 @@ public class ProductService {
         throw new IllegalArgumentException("Price must be greater than 1");
     }
 
-    // Check for negative stock quantity
     if (product.getStockQuantity() == null || product.getStockQuantity() < 0) {
         throw new IllegalArgumentException("Stock quantity cannot be negative");
     }
