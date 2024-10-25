@@ -5,25 +5,12 @@ Content-Type: application/json
 ###
 
 ### Get a product by ID
-GET http://localhost:8080/products/2
+GET http://localhost:8080/products/1
 Content-Type: application/json
 
 ###
 
 ### Create a new product
-POST http://localhost:8080/products
-Content-Type: application/json
-
-{
-  "name": "New Product",
-  "description": "This is a new product.",
-  "price": 1.0,
-  "stockQuantity": -2,
-  "category": "this"
-}
-
-
-### null description
 
 POST http://localhost:8080/products
 Content-Type: application/json
@@ -33,10 +20,11 @@ Content-Type: application/json
   //"description": "This is a new product.",
   "price": 25.50,
   "stockQuantity": 100,
-  "category": 1
+  "category": [
+    {"name": "hello"},
+    {"name": "hello2"}
+  ]
 }
-
-###
 
 ### Update a product
 PUT http://localhost:8080/products/1
@@ -46,9 +34,12 @@ Content-Type: application/json
   "id": 1,
   "name": "Updated Product",
   "description": "Updated description.",
-  "price": ,
+  "price": 10,
   "stockQuantity": 200,
-  "category": 2
+  "category": [
+    {"id": 1, "name": "this"},
+    {"id": 2, "name": "that"}
+  ]
 }
 
 ###

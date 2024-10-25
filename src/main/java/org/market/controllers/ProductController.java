@@ -40,6 +40,7 @@ public class ProductController {
   
   @PostMapping
   public Product createProduct(@Valid @RequestBody Product product) {
+    System.out.println(product);
     return productService.createProduct(product);
   }
   

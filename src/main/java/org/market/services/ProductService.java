@@ -6,7 +6,9 @@ import java.util.Optional;
 
 import org.market.Repositories.ProductRepository;
 import org.market.dtos.ProductStockUpdateDTO;
+import org.market.infrastructure.CategoryRepository;
 import org.market.products.Product;
+import org.market.products.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +19,19 @@ import jakarta.transaction.Transactional;
 public class ProductService {
   @Autowired
   private final ProductRepository productRepository;
+  private final CategoryRepository categoryRepository;
 
-  ProductService(ProductRepository productRepository) {
+  ProductService(ProductRepository productRepository, 
+      CategoryRepository categoryRepository) {
     this.productRepository = productRepository;
+    this.categoryRepository = categoryRepository;
   }
 
   public Product createProduct(Product product) {
     validateProduct(product);
+  
+    List<Category> cc = categoryRepository.saveAll(product.getCategory());
+    product.setCategory(cc);
     return productRepository.save(product);
   }
 
@@ -47,7 +55,6 @@ public class ProductService {
         throw new IllegalArgumentException("Price must be greater than 1");
     }
 
-    // Check for negative stock quantity
     if (product.getStockQuantity() == null || product.getStockQuantity() < 0) {
         throw new IllegalArgumentException("Stock quantity cannot be negative");
     }
@@ -56,12 +63,14 @@ public class ProductService {
   private Product updateData(Product existingData, Product newData) {
     existingData.setName(newData.getName());
     existingData.setPrice(newData.getPrice());
-    existingData.setCategory(newData.getCategory());
     existingData.setDescription(newData.getDescription());
     existingData.setStockQuantity(newData.getStockQuantity());
+    existingData.setCategory(newData.getCategory());
+
+    categoryRepository.saveAll(newData.getCategory());
     
     return productRepository.save(existingData);
-  }
+}
 
   public void deleteProduct(Long id) {
     productRepository.deleteById(id);

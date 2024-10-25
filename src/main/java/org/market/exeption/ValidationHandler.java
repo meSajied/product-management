@@ -13,13 +13,15 @@ import java.util.Map;
 @ControllerAdvice
 public class ValidationHandler {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getFieldErrors().forEach(error -> {
-            errors.put(error.getField(), error.getDefaultMessage());
-        });
-        return ResponseEntity.badRequest().body(errors);
-    }
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  public ResponseEntity<Map<String, String>> 
+      handleValidationExceptions(MethodArgumentNotValidException ex) {
+    Map<String, String> errors = new HashMap<>();
+    ex.getFieldErrors().forEach(error -> {
+        errors.put(error.getField(), error.getDefaultMessage());
+    });
+    
+    return ResponseEntity.badRequest().body(errors);
+  }
 }
